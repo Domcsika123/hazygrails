@@ -785,7 +785,7 @@ input, textarea, select { font-family: inherit; font-size: inherit; color: inher
   .nav__links.open { transform: translateY(0); opacity: 1; pointer-events: all; }
   .nav__links li { border-bottom: 1px solid var(--gray-5); }
   .nav__link { padding: 14px 0; display: block; font-size: 12px; }
-  .dropdown { position: static; transform: none; opacity: 1; visibility: visible; pointer-events: all; padding: 0; }
+  .dropdown { position: static; transform: none; opacity: 1; visibility: visible; padding: 0; }
   .dropdown__inner { box-shadow: none; border: none; background: transparent; padding: 4px 0 8px 16px; }
 
   /* Hero */
