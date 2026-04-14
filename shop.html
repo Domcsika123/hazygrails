@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HazyGrails — Webshop</title>
+  <link rel="icon" type="image/png" href="hazylogo.png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <button class="nav__hamburger" id="hamburger" aria-label="Menü">
+        <span></span><span></span><span></span>
+      </button>
+      <a href="index.html" class="nav__logo">
+        <img src="hazylogo_cropped.png" alt="HazyGrails" class="nav__logo-img" />
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html" class="nav__link"        data-i18n="nav_home">Főoldal</a></li>
+        <li><a href="shop.html"  class="nav__link active" data-i18n="nav_shop">Webshop</a></li>
+        <li class="nav__link-dropdown">
+          <a href="#" class="nav__link" data-i18n="nav_services">Szolgáltatások</a>
+          <div class="dropdown">
+            <div class="dropdown__inner">
+              <ul>
+                <li><a href="index.html#contact" data-i18n="nav_source">Egyedi beszerzes</a></li>
+                <li><a href="index.html#contact" data-i18n="nav_sell">Eladás / Felvásárlás</a></li>
+                <li><a href="index.html#contact" data-i18n="nav_contact">Kapcsolat</a></li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="nav__actions">
+        <button class="nav__lang" id="langToggle">EN</button>
+        <button class="nav__icon" id="searchToggle" aria-label="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </button>
+        <button class="nav__icon" id="cartToggle" aria-label="Cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="nav__cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+    </nav>
+    <div class="search-bar" id="searchBar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Keresés..." />
+      <button id="searchClose">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- CART DRAWER -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer__header">
+      <h3 data-i18n="cart_title">Kosár</h3>
+      <button id="cartClose">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="cart-drawer__items" id="cartItems">
+      <div class="cart-empty">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <p data-i18n="cart_empty">A kosár üres</p>
+      </div>
+    </div>
+    <div class="cart-drawer__footer" id="cartFooter" style="display:none">
+      <div class="cart-total">
+        <span data-i18n="cart_total">Összesen</span>
+        <span id="cartTotal">0 Ft</span>
+      </div>
+      <button class="btn btn--red btn--full" data-i18n="cart_checkout">Megrendelés →</button>
+      <p class="cart-note" data-i18n="cart_note">Autentikus termékek — 100% garancia</p>
+    </div>
+  </aside>
+
+  <!-- SHOP HEADER BANNER -->
+  <div class="shop-banner">
+    <div class="container">
+      <p class="eyebrow" data-i18n="prod_eyebrow">Elérhető most</p>
+      <h1 class="shop-banner__title" data-i18n="prod_title">Webshop</h1>
+    </div>
+  </div>
+
+  <!-- PRODUCTS -->
+  <section class="products shop-page" id="products">
+    <div class="container">
+      <div class="products__top">
+        <div class="products__filters">
+          <button class="filter-btn active" data-filter="all"         data-i18n="filter_all">Összes</button>
+          <button class="filter-btn"        data-filter="clothing"    data-i18n="filter_clothing">Ruha</button>
+          <button class="filter-btn"        data-filter="shoes"       data-i18n="filter_shoes">Cipő</button>
+          <button class="filter-btn"        data-filter="accessories" data-i18n="filter_acc">Kiegészítők</button>
+          <button class="filter-btn"        data-filter="new"         data-i18n="filter_new">Új</button>
+          <button class="filter-btn"        data-filter="sale"        data-i18n="filter_sale">Akció</button>
+        </div>
+        <div class="search-inline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="searchInputInline" placeholder="Keresés..." />
+        </div>
+      </div>
+      <div class="products__grid" id="productsGrid"></div>
+      <div class="products__more">
+        <button class="btn btn--outline" id="loadMore" data-i18n="load_more">További termékek</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="hazylogo.png" alt="HazyGrails" class="footer__logo-img" />
+          <p data-i18n="foot_desc">Autentikus luxusmárkák. Vásárlás, eladás és egyedi beszerzés — Budapest.</p>
+          <p class="footer__disclaimer" data-i18n="foot_disclaimer">Nem vagyunk kapcsolatban az oldalon szereplő márkákkal. Viszonteladói platform.</p>
+          <div class="footer__social">
+            <a href="https://instagram.com/hazygrails.hu" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer__links">
+          <div class="footer__col">
+            <h4 data-i18n="foot_shop">Vásárlás</h4>
+            <ul>
+              <li><a href="shop.html?filter=accessories" data-i18n="foot_bags">Táskák</a></li>
+              <li><a href="shop.html?filter=shoes"       data-i18n="foot_shoes">Cipők</a></li>
+              <li><a href="shop.html?filter=clothing"    data-i18n="foot_clothing">Ruházat</a></li>
+              <li><a href="shop.html?filter=accessories" data-i18n="foot_acc">Kiegészítők</a></li>
+              <li><a href="shop.html?filter=sale"        data-i18n="foot_sale">Akciók</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 data-i18n="foot_services">Szolgáltatások</h4>
+            <ul>
+              <li><a href="index.html#contact" data-i18n="foot_sell">Eladás / Felvásárlás</a></li>
+              <li><a href="index.html#contact" data-i18n="foot_source">Egyedi beszerzés</a></li>
+              <li><a href="#"                  data-i18n="foot_auth">Autentikáció</a></li>
+              <li><a href="#"                  data-i18n="foot_ship">Szállítás</a></li>
+              <li><a href="#"                  data-i18n="foot_return">Visszáru</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h4 data-i18n="foot_info">Információk</h4>
+            <ul>
+              <li><a href="#"                  data-i18n="foot_about">Rólunk</a></li>
+              <li><a href="#"                  data-i18n="foot_tos">ÁSZF</a></li>
+              <li><a href="#"                  data-i18n="foot_privacy">Adatvédelem</a></li>
+              <li><a href="index.html#contact" data-i18n="foot_contact">Kapcsolat</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p data-i18n="foot_rights">© 2025 HazyGrails. Minden jog fenntartva.</p>
+        <p data-i18n="foot_city">Budapest, Magyarország</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PRODUCT MODAL -->
+  <div class="modal-overlay" id="modalOverlay"></div>
+  <div class="modal" id="productModal">
+    <button class="modal__close" id="modalClose">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div class="modal__content" id="modalContent"></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="i18n.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
